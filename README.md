@@ -1,2 +1,2 @@
 # dotfiles
-Storage for my gitfiles
+Storage for my dotfiles
