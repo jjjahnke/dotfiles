@@ -64,6 +64,9 @@ appendpath "$HOME/.tmuxifier/bin"
 if which tmuxifier > /dev/null; then eval "$(tmuxifier init -)"; fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+
+[ -x "$(pyenv init -)" ] && eval "$(pyenv init -)"
+
 export SDKMAN_DIR="/Users/jjahnke/.sdkman"
 [[ -s "/Users/jjahnke/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/jjahnke/.sdkman/bin/sdkman-init.sh"
 
