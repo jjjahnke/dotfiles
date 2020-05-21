@@ -23,6 +23,14 @@ export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 alias ls='ls -GF'
 
+function StartupSound {
+  case "$1" in
+    --on) sudo nvram StartupMute=%01 
+      ;;
+    --off) sudo nvram StartupMute=%00
+      ;;
+  esac
+}
 
 function setjdk() {
   if [ $# -ne 0 ]; then
@@ -73,3 +81,6 @@ export SDKMAN_DIR="/Users/jjahnke/.sdkman"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export YVM_DIR=/Users/jahnke/.yvm
+[ -r $YVM_DIR/yvm.sh ] && . $YVM_DIR/yvm.sh
