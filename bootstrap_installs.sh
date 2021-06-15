@@ -1,3 +1,5 @@
+#Yer gonna need this cause MacOS doesn't like to remember passphrases
+#https://www.cyberciti.biz/faq/howto-fix-macos-keeps-asking-my-ssh-passphrase-since-i-updated-to-sierra/
 #Make sure homebrew is installed
 
 curl -s "https://get.sdkman.io" | bash
