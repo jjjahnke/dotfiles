@@ -1,31 +1,12 @@
-(which gnutar >/dev/null) && alias tar=$(which gnutar)
-(which gtar >/dev/null) && alias tar=$(which gtar)
-
-alias vi='vim'
-
-alias tmux='tmux -2'
-
-alias randomid='base64 /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1'
-
-alias restartVideo='sudo killall VDCAssistant'
-alias restartAudio='sudo killall coreaudiod'
-alias reloadAudio='sudo launchctl unload /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist && sudo launchctl load /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist'
-
-alias flushCache='sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache'
+source ./.alias
+source ./.console
 
 alias t=todo.sh
 complete -F _todo t
 
-alias xssh='TERM=xterm-color ssh'
-
-# Color dir output in screen
-export CLICOLOR=1
-export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
-alias ls='ls -GF'
-
 function StartupSound {
   case "$1" in
-    --on) sudo nvram StartupMute=%01 
+    --on) sudo nvram StartupMute=%01
       ;;
     --off) sudo nvram StartupMute=%00
       ;;
@@ -54,6 +35,7 @@ if [[ $EUID == 0 ]] ; then
 else
         PS1="$GREEN\h \u [ $NORMAL\w$GREEN ]$MAGENTA\$(parse_git_branch)$GREEN $\[\033[00m\] "
 fi
+
 
 appendpath() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then

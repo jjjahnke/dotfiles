@@ -1,0 +1,18 @@
+(which gnutar >/dev/null) && alias tar=$(which gnutar)
+(which gtar >/dev/null) && alias tar=$(which gtar)
+
+alias vi='vim'
+
+alias tmux='tmux -2'
+
+alias randomid='base64 /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1'
+
+alias restartVideo='sudo killall VDCAssistant'
+alias restartAudio='sudo killall coreaudiod'
+alias reloadAudio='sudo launchctl unload /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist && sudo launchctl load /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist'
+
+alias flushCache='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper'
+
+alias xssh='TERM=xterm-color ssh'
+
+alias ls='ls -GF'
