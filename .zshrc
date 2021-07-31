@@ -25,7 +25,11 @@ setopt PROMPT_SUBST
 
 # Setup a red prompt for root and a green one for users.
 if [[ $EUID == 0 ]] ; then
-  PROMPT='%F{red}%m %n [%f %. %F{red}]%f%F{magenta}$(parse_git_branch)%f -> '
+  PROMPT='%F{red}%m %n [%f %. %F{red}]%f%F{magenta}$(parse_git_branch)%f ->'$'\n'
 else
-  PROMPT='%F{green}%m %n [%f %. %F{green}]%f%F{magenta}$(parse_git_branch)%f -> '
+  PROMPT='%F{green}%m %n [%f %. %F{green}]%f%F{magenta}$(parse_git_branch)%f ->'$'\n'
 fi
+
+appendpath "$HOME/.tmuxifier/bin"
+
+[[ -s "/Users/jahnke/.gvm/scripts/gvm" ]] && source "/Users/jahnke/.gvm/scripts/gvm"
