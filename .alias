@@ -1,18 +1,23 @@
-(which gnutar >/dev/null) && alias tar=$(which gnutar)
-(which gtar >/dev/null) && alias tar=$(which gtar)
+if [[ "$OSTYPE" == "darwin"* ]]; then
 
-alias vi='vim'
+	(which gnutar >/dev/null) && alias tar=$(which gnutar)
+	(which gtar >/dev/null) && alias tar=$(which gtar)
 
-alias tmux='tmux -2'
+	alias vi='vim'
 
-alias randomid='base64 /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1'
+	alias tmux='tmux -2'
 
-alias restartVideo='sudo killall VDCAssistant'
-alias restartAudio='sudo killall coreaudiod'
-alias reloadAudio='sudo launchctl unload /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist && sudo launchctl load /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist'
+	alias randomid='base64 /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1'
 
-alias flushCache='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper'
+	alias restartVideo='sudo killall VDCAssistant'
+	alias restartAudio='sudo killall coreaudiod'
+	alias reloadAudio='sudo launchctl unload /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist && sudo launchctl load /System/Library/LaunchDaemons/com.apple.audio.coreaudiod.plist'
 
-alias xssh='TERM=xterm-color ssh'
+	alias flushCache='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper'
 
-alias ls='ls -GF'
+	alias xssh='TERM=xterm-color ssh'
+
+	alias ls='ls -GF'
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	alias ls='ls --color -F'
+fi
