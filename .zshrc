@@ -29,7 +29,3 @@ if [[ $EUID == 0 ]] ; then
 else
   PROMPT='%F{green}%m %n [%f %. %F{green}]%f%F{magenta}$(parse_git_branch)%f ->'$'\n'
 fi
-
-appendpath "$HOME/.tmuxifier/bin"
-
-[[ -s "/Users/jahnke/.gvm/scripts/gvm" ]] && source "/Users/jahnke/.gvm/scripts/gvm"
