@@ -12,8 +12,13 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+export NVM_BASH_COMPLETITION="$NVM_DIR/bash_completion"
+# If you load NVM from homebrew the paths are different.
+[ -s "/opt/homebrew/opt/nvm" ] && export NVM_DIR="/opt/homebrew/opt/nvm/"
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && export NVM_BASH_COMPLETITION="/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR//nvm.sh"
+[ -s "$NVM_BASH_COMPLETITION" ] && . "$NVM_BASH_COMPLETITION"
 
 export YVM_DIR="$HOME/.yvm"
 [ -r "$YVM_DIR/yvm.sh" ] && . "$YVM_DIR/yvm.sh"
