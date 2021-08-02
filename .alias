@@ -1,7 +1,7 @@
 alias randomid='base64 /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1'
 alias tmux='tmux -2'
 alias xssh='TERM=xterm-color ssh'
-
+alias remote_kube_proxy='kubectl proxy --address='0.0.0.0' --disable-filter=true'
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	(which gnutar >/dev/null) && alias tar=$(which gnutar)
