@@ -20,7 +20,7 @@ export NVM_BASH_COMPLETITION="$NVM_DIR/bash_completion"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR//nvm.sh"
 [ -s "$NVM_BASH_COMPLETITION" ] && . "$NVM_BASH_COMPLETITION"
 
-nvm use node
+[ -s "$NVM_DIR/nvm.sh" ] && nvm use node
 
 export YVM_DIR="$HOME/.yvm"
 [ -r "$YVM_DIR/yvm.sh" ] && . "$YVM_DIR/yvm.sh"
