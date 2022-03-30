@@ -1,8 +1,8 @@
 [ -s /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
-source ./.alias
-source ./.console
-source ./.zshrc
+source $HOME/.alias
+source $HOME/.console
+source $HOME/.zshrc
 
 autoload -Uz compinit
 compinit
@@ -27,3 +27,10 @@ export YVM_DIR="$HOME/.yvm"
 
 export GVM_DIR="$HOME/.gvm"
 [ -s "$HOME/.gvm/scripts/gvm" ] && source "$HOME/.gvm/scripts/gvm"
+
+
+if command -v pyenv 1>/dev/null 2>&1; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init --path)"
+fi
