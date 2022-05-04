@@ -29,3 +29,5 @@ if [[ $EUID == 0 ]] ; then
 else
   PROMPT='%F{green}%m %n [%f %. %F{green}]%f%F{magenta}$(parse_git_branch)%f ->'$'\n'
 fi
+
+export AWS_SDK_LOAD_CONFIG=true

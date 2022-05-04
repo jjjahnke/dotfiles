@@ -19,3 +19,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	alias ls='ls --color -F'
 fi
+
+if [ -f $HOME/.alias-reddit ]; then
+	source $HOME/.alias-reddit
+fi

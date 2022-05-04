@@ -1,0 +1,5 @@
+alias reddit_docker_login='docker login artifactory.build.ue1.snooguts.net'
+alias snoodev_proxy='snooctl proxy --cluster=dev-3'
+alias prod-3d_proxy='snooctl proxy --cluster=prod-3-d'
+alias prod-3e_proxy='snooctl proxy --cluster=prod-3-e'
+alias kube_ads-api='kubectl -n reddit-service-ads-api '
