@@ -3,3 +3,57 @@ alias snoodev_proxy='snooctl proxy --cluster=dev-3'
 alias prod-3d_proxy='snooctl proxy --cluster=prod-3-d'
 alias prod-3e_proxy='snooctl proxy --cluster=prod-3-e'
 alias kube_ads-api='kubectl -n reddit-service-ads-api '
+
+fix_keys() {
+    eval `ssh-agent`
+    ssh-add ~/.ssh/id_rsa
+}
+
+g_sd_ns() {
+    var=`whoami`
+    echo "${var//./-}"
+}
+
+g_kc_ns() {
+    echo ws-`g_sd_ns`
+}
+
+alias g_t='curl -s -k -X POST -u ZZOE2DpFG0u2lw:gNZBRaCsMTXOzB6TzlPRso4tmb4 -d "grant_type=refresh_token&refresh_token=627817014-_Lu05rDMn6kPjnegAyT_U9bZxfc" https://reddit.`g_sd_ns`.snoo.dev/api/v1/access_token | jq -r ".access_token"'
+
+g_a_d_v() {
+    curl -v -H  "authorization: bearer `g_t`" \
+    https://reddit-service-ads-api.`g_sd_ns`.snoo.dev$@
+}
+
+g_a_d() {
+    curl -H  "authorization: bearer `g_t`" \
+    https://reddit-service-ads-api.`g_sd_ns`.snoo.dev$@
+}
+
+sd_ssh() {
+    ns=`g_kc_ns`
+    if [ -z "$1" ]
+    then
+        PODS=(`kubectl get pods -n $ns --no-headers -o custom-columns=":metadata.name"` )
+    else
+        PODS=(`kubectl get pods -n $ns --no-headers -o custom-columns=":metadata.name" | grep -- $1` )
+    fi
+
+    if [ ${#PODS[@]} -eq 0 ]; then
+        echo "No running pods named '$1'"
+        return
+    fi
+
+    if [ ${#PODS[@]} -eq 1 ]; then
+        echo "One running pod (${PODS[@]:0:1})..."
+        kubectl exec -it ${PODS[@]:0:1} -n $ns -- bash
+        return
+    fi
+
+    echo "Running pods with that name:"
+    select PODNAME in $PODS;
+    do
+        kubectl exec -it $PODNAME -n $ns -- bash
+        break;
+    done   
+}
