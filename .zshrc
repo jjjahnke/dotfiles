@@ -1,3 +1,7 @@
+autoload -Uz compinit
+fpath=(~/.zsh/completion $fpath)
+compinit -i
+
 function setjdk() {
   if [ $# -ne 0 ]; then
     export JAVA_HOME=`/usr/libexec/java_home -v $@`
@@ -31,3 +35,7 @@ else
 fi
 
 export AWS_SDK_LOAD_CONFIG=true
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/jahnke/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
