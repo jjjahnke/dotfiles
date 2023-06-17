@@ -1,0 +1,1 @@
+alias aws-docker-login='aws ecr get-login-password | docker login --username AWS --password-stdin 965611669223.dkr.ecr.us-east-2.amazonaws.com'

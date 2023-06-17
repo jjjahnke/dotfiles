@@ -2,6 +2,8 @@ autoload -Uz compinit
 fpath=(~/.zsh/completion $fpath)
 compinit -i
 
+source <(kubectl completion zsh)
+
 function setjdk() {
   if [ $# -ne 0 ]; then
     export JAVA_HOME=`/usr/libexec/java_home -v $@`
