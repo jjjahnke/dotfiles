@@ -3,6 +3,7 @@ fpath=(~/.zsh/completion $fpath)
 compinit -i
 
 source <(kubectl completion zsh)
+source ~/dotfiles/config-kube-config.sh
 
 function setjdk() {
   if [ $# -ne 0 ]; then
@@ -37,6 +38,9 @@ else
 fi
 
 export AWS_SDK_LOAD_CONFIG=true
+
+# Add Krew to my PATH
+export PATH="${PATH}:${HOME}/.krew/bin"
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/jahnke/.rd/bin:$PATH"
