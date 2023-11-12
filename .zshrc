@@ -1,5 +1,7 @@
+# fpath=(~/.zsh/completion $fpath)
+# fpath+=("/opt/homebrew/share/zsh/site-functions")
+fpath=(~/.zsh/completion /opt/homebrew/share/zsh/site-functions $fpath)
 autoload -Uz compinit
-fpath=(~/.zsh/completion $fpath)
 compinit -i
 
 source <(kubectl completion zsh)

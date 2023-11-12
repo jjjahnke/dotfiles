@@ -1,8 +1,10 @@
-alias randomid='base64 /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1'
+alias randomid=uuidgen
 alias tmux='tmux -2'
 alias xssh='TERM=xterm-color ssh'
 alias kubectx='kubectl ctx'
 alias kubens='kubectl ns'
+alias k='kubectl'
+alias getsha='git rev-parse HEAD'
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	(which gnutar >/dev/null) && alias tar=$(which gnutar)
@@ -16,7 +18,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
 	alias flushCache='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper'
 
+	export CLICOLOR=1
+	export LSCOLORS=GxFxCxDxBxegedabagaced
+
 	alias ls='ls -GF'
+	alias ll='ls -lGF'
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	alias ls='ls --color -F'
 fi
