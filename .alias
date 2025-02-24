@@ -1,10 +1,13 @@
 alias randomid=uuidgen
 alias tmux='tmux -2'
 alias xssh='TERM=xterm-color ssh'
-alias kubectx='kubectl ctx'
-alias kubens='kubectl ns'
+alias kx='kubectl ctx'
+alias kn='kubectl ns'
 alias k='kubectl'
 alias getsha='git rev-parse HEAD'
+alias ish='TERM=xterm-color ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+alias icp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+alias iap='ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook'
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	(which gnutar >/dev/null) && alias tar=$(which gnutar)
