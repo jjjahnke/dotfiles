@@ -2,6 +2,9 @@
 - name: Setup Development Environment
   hosts: localhost
   become: yes
+  vars:
+    dotfiles_dir: "{{ ansible_env.PWD }}"
+
   tasks:
     - name: Ensure curl is installed
       package:
@@ -62,11 +65,11 @@
         state: link
         force: yes
       loop:
-        - { src: "{{ ansible_env.PWD }}/.zshrc", dest: "{{ ansible_env.HOME }}/.zshrc" }
-        - { src: "{{ ansible_env.PWD }}/.zprofile", dest: "{{ ansible_env.HOME }}/.zprofile" }
-        - { src: "{{ ansible_env.PWD }}/.alias", dest: "{{ ansible_env.HOME }}/.alias" }
-        - { src: "{{ ansible_env.PWD }}/.console", dest: "{{ ansible_env.HOME }}/.console" }
-        - { src: "{{ ansible_env.PWD }}/.tmux.conf", dest: "{{ ansible_env.HOME }}/.tmux.conf" }
+        - { src: "{{ dotfiles_dir }}/.zshrc", dest: "{{ ansible_env.HOME }}/.zshrc" }
+        - { src: "{{ dotfiles_dir }}/.zprofile", dest: "{{ ansible_env.HOME }}/.zprofile" }
+        - { src: "{{ dotfiles_dir }}/.alias", dest: "{{ ansible_env.HOME }}/.alias" }
+        - { src: "{{ dotfiles_dir }}/.console", dest: "{{ ansible_env.HOME }}/.console" }
+        - { src: "{{ dotfiles_dir }}/.tmux.conf", dest: "{{ ansible_env.HOME }}/.tmux.conf" }
       when: zsh_check.rc == 0
 
     - name: Create symbolic links for Bash
@@ -76,9 +79,9 @@
         state: link
         force: yes
       loop:
-        - { src: "{{ ansible_env.PWD }}/.bashrc", dest: "{{ ansible_env.HOME }}/.bashrc" }
-        - { src: "{{ ansible_env.PWD }}/.profile", dest: "{{ ansible_env.HOME }}/.profile" }
-        - { src: "{{ ansible_env.PWD }}/.alias", dest: "{{ ansible_env.HOME }}/.alias" }
-        - { src: "{{ ansible_env.PWD }}/.console", dest: "{{ ansible_env.HOME }}/.console" }
-        - { src: "{{ ansible_env.PWD }}/.tmux.conf", dest: "{{ ansible_env.HOME }}/.tmux.conf" }
+        - { src: "{{ dotfiles_dir }}/.bashrc", dest: "{{ ansible_env.HOME }}/.bashrc" }
+        - { src: "{{ dotfiles_dir }}/.profile", dest: "{{ ansible_env.HOME }}/.profile" }
+        - { src: "{{ dotfiles_dir }}/.alias", dest: "{{ ansible_env.HOME }}/.alias" }
+        - { src: "{{ dotfiles_dir }}/.console", dest: "{{ ansible_env.HOME }}/.console" }
+        - { src: "{{ dotfiles_dir }}/.tmux.conf", dest: "{{ ansible_env.HOME }}/.tmux.conf" }
       when: zsh_check.rc != 0
