@@ -1,0 +1,51 @@
+---
+- name: Setup Development Environment
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Ensure curl is installed
+      package:
+        name: curl
+        state: present
+
+    - name: Install NVM
+      shell: |
+        export NVM_DIR="$HOME/.nvm"
+        mkdir -p "$NVM_DIR"
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+      args:
+        executable: /bin/bash
+
+    - name: Install Pyenv dependencies
+      package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - make
+        - build-essential
+        - libssl-dev
+        - zlib1g-dev
+        - libbz2-dev
+        - libreadline-dev
+        - libsqlite3-dev
+        - wget
+        - curl
+        - llvm
+        - libncurses5-dev
+        - libncursesw5-dev
+        - xz-utils
+        - tk-dev
+        - libffi-dev
+        - liblzma-dev
+        - python-openssl
+        - git
+
+    - name: Install Pyenv
+      git:
+        repo: 'https://github.com/pyenv/pyenv.git'
+        dest: '{{ ansible_env.HOME }}/.pyenv'
+
+    - name: Install Golang
+      package:
+        name: golang
+        state: present
