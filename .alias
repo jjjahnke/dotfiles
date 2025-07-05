@@ -8,6 +8,47 @@ alias getsha='git rev-parse HEAD'
 alias ish='TERM=xterm-color ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias icp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias iap='ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook'
+alias gcli='GOOGLE_CLOUD_PROJECT=gen-lang-client-0725514971 npx https://github.com/google-gemini/gemini-cli'
+alias drol='OLLAMA_API_BASE="http://gpu-server:8000" aider --model ollama_chat/devstral:24b'
+alias dlol='OLLAMA_API_BASE="http://localhost:11434" aider --model ollama_chat/devstral:24b'
+
+_pyenv_bootstrap() {
+  local PYTHON_VERSION=$1
+
+  if [ -z "$PYTHON_VERSION" ]; then
+    echo "Usage: pyenv_bootstrap <python_version>"
+    return 1
+  fi
+
+  echo "🔧 Setting pyenv local to $PYTHON_VERSION"
+  pyenv local "$PYTHON_VERSION"
+
+  echo "🐍 Creating virtual environment..."
+  python -m venv .venv
+  source .venv/bin/activate
+
+  echo "⬆️ Upgrading pip..."
+  pip install --upgrade pip
+
+  echo "⚡ Installing uv..."
+  pip install uv
+
+  if [ -f pyproject.toml ]; then
+    echo "🔒 Lockfile detected. Installing with uv sync..."
+    uv sync
+  else
+    echo "⚠️ No pyproject.toml found. Please create one for lockfile support."
+  fi
+
+  echo "🧩 Installing compatible aider and openai..."
+  pip install 'git+https://github.com/paul-gauthier/aider.git'
+  pip install 'openai==1.2.4'
+
+  echo "✅ Bootstrap complete. Python $PYTHON_VERSION, .venv ready, uv, aider, and openai installed."
+}
+
+alias pyenv_bootstrap='_pyenv_bootstrap'
+
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	(which gnutar >/dev/null) && alias tar=$(which gnutar)
