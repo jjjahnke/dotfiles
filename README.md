@@ -31,7 +31,7 @@ This repository contains configuration files and scripts, commonly known as "dot
    ./bootstrap-zsh.sh
    ./bootstrap_installs.sh
    ```
-3. Run the Ansible playbook to install NVM, Pyenv, and Golang:
+3. Run the Ansible playbook from the dotfiles directory to install NVM, Pyenv, and Golang:
    ```bash
    ansible-playbook ansible/playbook.yml
    ```
