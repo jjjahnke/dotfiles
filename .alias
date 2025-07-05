@@ -40,11 +40,10 @@ _pyenv_bootstrap() {
     echo "⚠️ No pyproject.toml found. Please create one for lockfile support."
   fi
 
-  echo "🧩 Installing compatible aider and openai..."
-  pip install 'git+https://github.com/paul-gauthier/aider.git'
+  echo "🧩 Installing compatible openai..."
   pip install 'openai==1.2.4'
 
-  echo "✅ Bootstrap complete. Python $PYTHON_VERSION, .venv ready, uv, aider, and openai installed."
+  echo "✅ Bootstrap complete. Python $PYTHON_VERSION, .venv ready, uv, and openai installed."
 }
 
 alias pyenv_bootstrap='_pyenv_bootstrap'
