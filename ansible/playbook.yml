@@ -128,3 +128,26 @@
         - { src: "{{ dotfiles_dir }}/.console", dest: "{{ ansible_env.HOME }}/.console" }
         - { src: "{{ dotfiles_dir }}/.tmux.conf", dest: "{{ ansible_env.HOME }}/.tmux.conf" }
       when: zsh_check.rc != 0
+
+    - name: Check if zsh is installed
+      shell: |
+        if command -v zsh >/dev/null 2>&1; then
+          echo "zsh is installed"
+        else
+          echo "zsh is not installed"
+        fi
+      register: zsh_installed
+
+    - name: Create symbolic links for Zsh
+      file:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        state: link
+        force: yes
+      loop:
+        - { src: "{{ dotfiles_dir }}/.zshrc", dest: "{{ ansible_env.HOME }}/.zshrc" }
+        - { src: "{{ dotfiles_dir }}/.zprofile", dest: "{{ ansible_env.HOME }}/.zprofile" }
+        - { src: "{{ dotfiles_dir }}/.alias", dest: "{{ ansible_env.HOME }}/.alias" }
+        - { src: "{{ dotfiles_dir }}/.console", dest: "{{ ansible_env.HOME }}/.console" }
+        - { src: "{{ dotfiles_dir }}/.tmux.conf", dest: "{{ ansible_env.HOME }}/.tmux.conf" }
+      when: "'zsh is installed' in zsh_installed.stdout"
