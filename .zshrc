@@ -45,4 +45,4 @@ fi
 
 export AWS_SDK_LOAD_CONFIG=true
 
-[[ -s "/Users/jahnke/.gvm/scripts/gvm" ]] && source "/Users/jahnke/.gvm/scripts/gvm"
+source ~/env_setup.sh
