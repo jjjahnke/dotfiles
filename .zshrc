@@ -45,4 +45,7 @@ fi
 
 export AWS_SDK_LOAD_CONFIG=true
 
-source ~/env_setup.sh
+if [ -z "$ENV_SETUP_SOURCED" ]; then
+  source ~/env_setup.sh
+  export ENV_SETUP_SOURCED=1
+fi

@@ -48,5 +48,8 @@ appendpath "$HOME/.tmuxifier/bin"
 
 if which tmuxifier > /dev/null; then eval "$(tmuxifier init -)"; fi
 
-source ~/env_setup.sh
+if [ -z "$ENV_SETUP_SOURCED" ]; then
+  source ~/env_setup.sh
+  export ENV_SETUP_SOURCED=1
+fi
 
