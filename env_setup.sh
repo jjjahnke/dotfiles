@@ -12,7 +12,7 @@ export NVM_BASH_COMPLETION="$NVM_DIR/bash_completion"
 [ -s "$NVM_BASH_COMPLETION" ] && \. "$NVM_BASH_COMPLETION"
 
 if command -v node &> /dev/null; then
-  echo "Now using node v$(node -v)"
+  echo "Now using node $(node -v)"
 fi
 
 # GVM setup
