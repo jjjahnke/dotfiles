@@ -2,6 +2,21 @@ fpath=(~/.zsh/completion /opt/homebrew/share/zsh/site-functions $fpath)
 autoload -Uz compinit
 compinit -i
 
+function StartupSound {
+  case "$1" in
+    --on) sudo nvram StartupMute=%01
+      ;;
+    --off) sudo nvram StartupMute=%00
+      ;;
+  esac
+}
+
+function setjdk() {
+  if [ $# -ne 0 ]; then
+   export JAVA_HOME=`/usr/libexec/java_home -v $@`
+  fi
+ }
+
 source <(kubectl completion zsh)
 source ~/dotfiles/config-kube-config.sh
 
