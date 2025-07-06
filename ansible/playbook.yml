@@ -63,7 +63,6 @@
         - libffi-dev
         - liblzma-dev
         - python-openssl
-        - git
 
     - name: Install Pyenv
       git:
