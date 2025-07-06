@@ -22,16 +22,10 @@ This repository contains configuration files and scripts, commonly known as "dot
 - **Kubernetes Configuration**:
   - `config-kube-config.sh` for managing Kubernetes configuration files.
 
-## Usage
+## Setup Instructions
 
 1. Clone the repository to your home directory.
-2. Run the bootstrap scripts to set up your environment:
-   ```bash
-   ./bootstrap.sh
-   ./bootstrap-zsh.sh
-   ./bootstrap_installs.sh
-   ```
-3. Run the Ansible playbook from the dotfiles directory to install NVM, Pyenv, and Golang:
+2. Run the Ansible playbook from the dotfiles directory to set up your environment, including installing NVM, Pyenv, Golang, and other necessary tools:
    ```bash
    ansible-playbook ansible/playbook.yml
    ```
