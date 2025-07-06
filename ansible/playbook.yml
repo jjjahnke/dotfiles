@@ -82,6 +82,11 @@
         src: "{{ dotfiles_dir }}/config-kube-config.sh"
         dest: "{{ ansible_env.HOME }}/.kube/config-kube-config.sh"
 
+    - name: Copy env_setup.sh to home directory
+      copy:
+        src: "{{ dotfiles_dir }}/env_setup.sh"
+        dest: "{{ ansible_env.HOME }}/env_setup.sh"
+
     - name: Install Pyenv dependencies
       package:
         name: "{{ item }}"

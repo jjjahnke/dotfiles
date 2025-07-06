@@ -16,6 +16,9 @@ This repository contains configuration files and scripts, commonly known as "dot
 - **Terminal and Tmux Configuration**:
   - `.tmux.conf` and `tmux-256color.terminfo` for configuring the Tmux terminal multiplexer.
 
+- **Environment Setup**:
+  - `env_setup.sh` for consistent environment setup across different shells.
+
 - **Kubernetes Configuration**:
   - `config-kube-config.sh` for managing Kubernetes configuration files.
 
