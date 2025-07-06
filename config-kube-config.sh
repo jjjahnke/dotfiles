@@ -9,8 +9,7 @@ fi
 # Your additional kubeconfig files should be inside ~/.kube/config-files
 ADD_KUBECONFIG_FILES="$HOME/.kube/config-files"
 mkdir -p "${ADD_KUBECONFIG_FILES}"
-mapfile -t kubeconfigFiles < <(find "${ADD_KUBECONFIG_FILES}" -type f \( -name "*.yml" -o -name "*.yaml" \) -print0 | xargs -0 -n1)
-for kubeconfigFile in "${kubeconfigFiles[@]}"
+find "${ADD_KUBECONFIG_FILES}" -type f \( -name "*.yml" -o -name "*.yaml" \) -print0 | while IFS= read -r -d '' kubeconfigFile
 do
     KUBECONFIG="$kubeconfigFile:$KUBECONFIG"
 done
