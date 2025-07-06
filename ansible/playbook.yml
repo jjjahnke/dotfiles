@@ -33,6 +33,12 @@
         - kubectl
       when: ansible_facts['os_family'] != 'Darwin'
 
+    - name: Install SDKMAN
+      shell: |
+        curl -s "https://get.sdkman.io" | bash
+      args:
+        executable: /bin/bash
+
     - name: Install NVM
       shell: |
         export NVM_DIR="$HOME/.nvm"
@@ -40,6 +46,41 @@
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
       args:
         executable: /bin/bash
+
+    - name: Clone tmuxifier
+      git:
+        repo: 'https://github.com/jimeh/tmuxifier.git'
+        dest: '{{ ansible_env.HOME }}/.tmuxifier'
+
+    - name: Install tmux-256color terminfo
+      shell: |
+        tic tmux-256color.terminfo
+      args:
+        chdir: "{{ dotfiles_dir }}"
+
+    - name: Install Krew
+      shell: |
+        set -x; cd "$(mktemp -d)" &&
+        OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
+        ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
+        KREW="krew-${OS}_${ARCH}" &&
+        curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&
+        tar zxvf "${KREW}.tar.gz" &&
+        ./"${KREW}" install krew
+      args:
+        executable: /bin/bash
+
+    - name: Install Krew plugins
+      shell: |
+        kubectl krew install ctx
+        kubectl krew install ns
+      args:
+        executable: /bin/bash
+
+    - name: Copy config-kube-config.sh to .kube directory
+      copy:
+        src: "{{ dotfiles_dir }}/config-kube-config.sh"
+        dest: "{{ ansible_env.HOME }}/.kube/config-kube-config.sh"
 
     - name: Install Pyenv dependencies
       package:
