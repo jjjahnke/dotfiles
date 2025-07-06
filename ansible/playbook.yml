@@ -74,20 +74,6 @@
         name: golang
         state: present
 
-    - name: Create symbolic links for Zsh
-      file:
-        src: "{{ item.src }}"
-        dest: "{{ item.dest }}"
-        state: link
-        force: yes
-      loop:
-        - { src: "{{ dotfiles_dir }}/.zshrc", dest: "{{ ansible_env.HOME }}/.zshrc" }
-        - { src: "{{ dotfiles_dir }}/.zprofile", dest: "{{ ansible_env.HOME }}/.zprofile" }
-        - { src: "{{ dotfiles_dir }}/.alias", dest: "{{ ansible_env.HOME }}/.alias" }
-        - { src: "{{ dotfiles_dir }}/.console", dest: "{{ ansible_env.HOME }}/.console" }
-        - { src: "{{ dotfiles_dir }}/.tmux.conf", dest: "{{ ansible_env.HOME }}/.tmux.conf" }
-      when: zsh_check.rc == 0
-
     - name: Create symbolic links for Bash
       file:
         src: "{{ item.src }}"
