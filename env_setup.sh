@@ -11,6 +11,10 @@ export NVM_BASH_COMPLETION="$NVM_DIR/bash_completion"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_BASH_COMPLETION" ] && \. "$NVM_BASH_COMPLETION"
 
+if command -v node &> /dev/null; then
+  echo "Now using node v$(node -v)"
+fi
+
 # GVM setup
 export GVM_DIR="$HOME/.gvm"
 [ -s "$GVM_DIR/scripts/gvm" ] && source "$GVM_DIR/scripts/gvm"
