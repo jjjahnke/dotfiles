@@ -50,6 +50,17 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	(which gnutar >/dev/null) && alias tar=$(which gnutar)
 	(which gtar >/dev/null) && alias tar=$(which gtar)
 
+	function StartupSound {
+	  case "$1" in
+	    --on) sudo nvram StartupMute=%01
+	      ;;
+	    --off) sudo nvram StartupMute=%00
+	      ;;
+	    *) echo "Usage: StartupSound --on|--off"
+	      ;;
+	  esac
+	}
+
 	alias vi='vim'
 
 	alias restartVideo='sudo killall VDCAssistant'
