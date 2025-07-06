@@ -10,8 +10,6 @@ This repository contains configuration files and scripts, commonly known as "dot
 - **Aliases**:
   - `.alias`, `.alias-aws`, and `.alias-reddit` for command shortcuts to simplify command-line tasks.
 
-- **Bootstrap Scripts**:
-  - `bootstrap.sh`, `bootstrap-zsh.sh`, and `bootstrap_installs.sh` for setting up symbolic links and installing necessary tools.
 
 - **Git Configuration**:
   - `.gitignore` to exclude specific files and directories from being tracked by Git.
