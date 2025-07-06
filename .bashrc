@@ -1,6 +1,3 @@
-source $HOME/.alias
-source $HOME/.console
-
 alias t=todo.sh
 complete -F _todo t
 
