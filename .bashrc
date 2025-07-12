@@ -1,16 +1,6 @@
 alias t=todo.sh
 complete -F _todo t
 
-function StartupSound {
-  case "$1" in
-    --on) sudo nvram StartupMute=%01
-      ;;
-    --off) sudo nvram StartupMute=%00
-      ;;
-  esac
-}
-
-
 # Git branch in prompt.
 
 parse_git_branch() {
