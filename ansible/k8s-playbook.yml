@@ -52,3 +52,56 @@
         src: "{{ dotfiles_dir }}/config-kube-config.sh"
         dest: "{{ ansible_env.HOME }}/.kube/config-kube-config.sh"
       when: kubectl_installed.rc == 0
+- name: Setup Kubernetes Environment
+  hosts: localhost
+  become: yes
+  vars:
+    dotfiles_dir: "{{ ansible_env.PWD }}"
+
+  tasks:
+    - name: Add Kubernetes repository
+      apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://pkgs.k8s.io/core:/stable/deb/ /"
+        state: present
+        filename: "kubernetes"
+      when: ansible_facts['os_family'] != 'Darwin'
+
+    - name: Add Kubernetes apt key
+      apt_key:
+        url: "https://pkgs.k8s.io/core:/stable/deb/Release.key"
+        state: present
+        keyring: "/usr/share/keyrings/kubernetes-archive-keyring.gpg"
+      when: ansible_facts['os_family'] != 'Darwin'
+
+    - name: Ensure kubectl is installed (Linux)
+      package:
+        name: kubectl
+        state: present
+      when: ansible_facts['os_family'] != 'Darwin'
+
+    - name: Install Krew
+      shell: |
+        set -x; cd "$(mktemp -d)" &&
+        OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
+        ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
+        KREW="krew-${OS}_${ARCH}" &&
+        curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&
+        tar zxvf "${KREW}.tar.gz" &&
+        ./"${KREW}" install krew
+      args:
+        executable: /bin/bash
+      when: kubectl_installed.rc == 0
+
+    - name: Install Krew plugins
+      shell: |
+        kubectl krew install ctx
+        kubectl krew install ns
+      args:
+        executable: /bin/bash
+      when: kubectl_installed.rc == 0
+
+    - name: Copy config-kube-config.sh to .kube directory
+      copy:
+        src: "{{ dotfiles_dir }}/config-kube-config.sh"
+        dest: "{{ ansible_env.HOME }}/.kube/config-kube-config.sh"
+      when: kubectl_installed.rc == 0
