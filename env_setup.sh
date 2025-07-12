@@ -31,3 +31,8 @@ if command -v pyenv &> /dev/null; then
 fi
 
 export AWS_SDK_LOAD_CONFIG=true
+
+# Source alias files if they exist
+[ -f "$HOME/.alias" ] && source "$HOME/.alias"
+[ -f "$HOME/.alias-aws" ] && source "$HOME/.alias-aws"
+[ -f "$HOME/.alias-reddit" ] && source "$HOME/.alias-reddit"
