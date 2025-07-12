@@ -25,15 +25,16 @@
 
     - name: Add Kubernetes repository
       apt_repository:
-        repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+        repo: "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://pkgs.k8s.io/core:/stable/deb/ /"
         state: present
         filename: "kubernetes"
       when: ansible_facts['os_family'] != 'Darwin'
 
     - name: Add Kubernetes apt key
       apt_key:
-        url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+        url: "https://pkgs.k8s.io/core:/stable/deb/Release.key"
         state: present
+        keyring: "/usr/share/keyrings/kubernetes-archive-keyring.gpg"
       when: ansible_facts['os_family'] != 'Darwin'
 
     - name: Ensure required packages are installed (Linux)
