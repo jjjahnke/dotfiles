@@ -30,7 +30,6 @@
       loop:
         - curl
         - jq
-        - kubectl
       when: ansible_facts['os_family'] != 'Darwin'
 
     - name: Install SDKMAN
