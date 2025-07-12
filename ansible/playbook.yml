@@ -54,10 +54,12 @@
         executable: /bin/bash
 
 
-    - name: Copy env_setup.sh to home directory
-      copy:
+    - name: Link env_setup.sh to home directory
+      file:
         src: "{{ dotfiles_dir }}/env_setup.sh"
         dest: "{{ ansible_env.HOME }}/env_setup.sh"
+        state: link
+        force: yes
 
     - name: Install Pyenv dependencies
       package:
