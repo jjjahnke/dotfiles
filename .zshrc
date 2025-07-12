@@ -2,16 +2,6 @@ fpath=(~/.zsh/completion /opt/homebrew/share/zsh/site-functions $fpath)
 autoload -Uz compinit
 compinit -i
 
-function StartupSound {
-  case "$1" in
-    --on) sudo nvram StartupMute=%01
-      ;;
-    --off) sudo nvram StartupMute=%00
-      ;;
-  esac
-}
-
-
 source <(kubectl completion zsh)
 source ~/dotfiles/config-kube-config.sh
 
@@ -42,8 +32,6 @@ if [[ $EUID == 0 ]] ; then
 else
   PROMPT='%F{green}%m %n [%f %. %F{green}]%f%F{magenta}$(parse_git_branch)%f ->'$'\n'
 fi
-
-export AWS_SDK_LOAD_CONFIG=true
 
 if [ -z "$ENV_SETUP_SOURCED" ]; then
   source ~/env_setup.sh
