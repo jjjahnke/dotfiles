@@ -23,7 +23,6 @@
         - kubectl
         - unzip
         - zip
-        - zip
       when: ansible_facts['os_family'] == 'Darwin'
 
     - name: Ensure required packages are installed (Linux)
@@ -34,6 +33,7 @@
         - curl
         - jq
         - unzip
+        - zip
       when: ansible_facts['os_family'] != 'Darwin'
 
     - name: Download SDKMAN script
