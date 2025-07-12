@@ -10,7 +10,6 @@ export NVM_BASH_COMPLETION="$NVM_DIR/bash_completion"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && export NVM_BASH_COMPLETION="/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_BASH_COMPLETION" ] && \. "$NVM_BASH_COMPLETION"
-
 if command -v node &> /dev/null; then
   echo "Now using node $(node -v)"
 fi
@@ -30,3 +29,5 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv &> /dev/null; then
   echo "Now using python v$(pyenv global) (pip v$(pip3 --version | awk '{print $2}'))"
 fi
+
+export AWS_SDK_LOAD_CONFIG=true
