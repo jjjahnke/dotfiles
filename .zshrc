@@ -2,8 +2,10 @@ fpath=(~/.zsh/completion /opt/homebrew/share/zsh/site-functions $fpath)
 autoload -Uz compinit
 compinit -i
 
-source <(kubectl completion zsh)
-source ~/dotfiles/config-kube-config.sh
+if command -v kubectl &> /dev/null; then
+  source <(kubectl completion zsh)
+  source ~/dotfiles/config-kube-config.sh
+fi
 
 # Git branch in prompt.
 parse_git_branch() {

@@ -40,3 +40,7 @@ if [ -z "$ENV_SETUP_SOURCED" ]; then
   export ENV_SETUP_SOURCED=1
 fi
 
+if command -v kubectl &> /dev/null; then
+  source ~/dotfiles/config-kube-config.sh
+fi
+
