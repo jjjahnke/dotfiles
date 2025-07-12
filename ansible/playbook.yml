@@ -60,9 +60,7 @@
 
     - name: Install tmux-256color terminfo
       shell: |
-        tic tmux-256color.terminfo
-      args:
-        chdir: "{{ dotfiles_dir }}"
+        tic "{{ dotfiles_dir }}/tmux-256color.terminfo"
 
     - name: Copy env_setup.sh to home directory
       copy:
