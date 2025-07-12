@@ -32,11 +32,14 @@
         - jq
       when: ansible_facts['os_family'] != 'Darwin'
 
+    - name: Download SDKMAN script
+      get_url:
+        url: "https://get.sdkman.io"
+        dest: "/tmp/sdkman-install.sh"
+        mode: '0755'
+
     - name: Install SDKMAN
-      shell: |
-        curl -s "https://get.sdkman.io" | bash
-      args:
-        executable: /bin/bash
+      command: "/bin/bash /tmp/sdkman-install.sh"
 
     - name: Install NVM
       shell: |
