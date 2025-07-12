@@ -1,0 +1,16 @@
+---
+- name: Setup Tmux Environment
+  hosts: localhost
+  become: yes
+  vars:
+    dotfiles_dir: "{{ ansible_env.PWD }}"
+
+  tasks:
+    - name: Clone tmuxifier
+      git:
+        repo: 'https://github.com/jimeh/tmuxifier.git'
+        dest: '{{ ansible_env.HOME }}/.tmuxifier'
+
+    - name: Install tmux-256color terminfo
+      shell: |
+        tic "{{ dotfiles_dir }}/tmux-256color.terminfo"

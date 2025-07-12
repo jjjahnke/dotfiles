@@ -53,14 +53,6 @@
       args:
         executable: /bin/bash
 
-    - name: Clone tmuxifier
-      git:
-        repo: 'https://github.com/jimeh/tmuxifier.git'
-        dest: '{{ ansible_env.HOME }}/.tmuxifier'
-
-    - name: Install tmux-256color terminfo
-      shell: |
-        tic "{{ dotfiles_dir }}/tmux-256color.terminfo"
 
     - name: Copy env_setup.sh to home directory
       copy:
