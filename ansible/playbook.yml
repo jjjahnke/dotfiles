@@ -72,6 +72,11 @@
       args:
         chdir: "{{ dotfiles_dir }}"
 
+    - name: Check if kubectl is installed
+      command: which kubectl
+      register: kubectl_installed
+      ignore_errors: yes
+
     - name: Install Krew
       shell: |
         set -x; cd "$(mktemp -d)" &&
@@ -83,11 +88,7 @@
         ./"${KREW}" install krew
       args:
         executable: /bin/bash
-
-    - name: Check if kubectl is installed
-      command: which kubectl
-      register: kubectl_installed
-      ignore_errors: yes
+      when: kubectl_installed.rc == 0
 
     - name: Install Krew plugins
       shell: |
